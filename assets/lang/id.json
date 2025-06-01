@@ -1,0 +1,43 @@
+{
+    "bottomNavBar": {
+        "camera": "Kamera",
+        "map": "Peta",
+        "settings": "Pengaturan"
+    },
+    "settings": {
+        "title": "Pengaturan",
+        "language": "Bahasa",
+        "darkMode": "Tema Gelap",
+        "profile": "Profil",
+        "about": "Tentang Saya",
+        "logout": "Keluar",
+        "logoutConfirm": "Apakah Anda yakin ingin keluar?",
+        "logoutCancel": "Batal"
+    },
+    "profile": {
+        "title": "Profil",
+        "edit-profile": "Edit Profil",
+        "change-password": "Ubah Kata Sandi"
+    },
+    "edit-profile": {
+        "title": "Edit Profil",
+        "userDataProvider": "Pengguna belum login",
+        "name": "Nama",
+        "name-validate": "Nama tidak boleh kosong",
+        "email": "Email",
+        "phone": "Nomor Telepon",
+        "phone-validate": "Nomor telepon tidak valid",
+        "save": "Simpan",
+        "message-save-success": "Profil berhasil disimpan",
+        "message-save-failed": "Profil gagal disimpan"
+    },
+    "about": {
+        "title": "Tentang Saya",
+        "appName": "Deteksi Lubang Jalan",
+        "version": "Versi",
+        "buildNumber": "Nomor Build",
+        "description": "Aplikasi ini digunakan untuk mendeteksi lubang jalan secara real-time menggunakan kamera dan kecerdasan buatan. Dibuat sebagai solusi untuk membantu pengguna jalan menghindari kerusakan kendaraan dan kecelakaan.",
+        "contact": "Kontak & Bantuan",
+        "website": "Website Resmi"
+    }
+}

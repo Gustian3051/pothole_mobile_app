@@ -1,0 +1,44 @@
+{
+    "bottomNavBar": {
+        "camera": "Camera",
+        "map": "Map",
+        "settings": "Settings"
+    },
+    "settings": {
+        "title": "Settings",
+        "language": "Language",
+        "darkMode": "Dark Mode",
+        "profile": "Profile",
+        "about": "About Me",
+        "logout": "Logout",
+        "logoutConfirm": "Are you sure you want to logout?",
+        "logoutCancel": "Cancel"
+    },
+    "profile": {
+        "title": "Profile",
+        "edit-profile": "Edit Profile",
+        "change-password": "Change Password"
+    },
+    "edit-profile": {
+        "title": "Edit Profile",
+        "userDataProvider": "User not logged in",
+        "name": "Name",
+        "name-validate": "Name cannot be empty",
+        "email": "Email",
+        "phone": "Phone Number",
+        "phone-validate": "Phone number is not valid",
+        "save": "Save",
+        "message-save-success": "Profile saved successfully",
+        "message-save-failed": "Failed to save profile"
+    },
+    "about": {
+        "title": "About Me",
+        "appName": "Pothole Detector",
+        "version": "Version",
+        "buildNumber": "Build Number",
+        "description": "This app is used to detect potholes in real-time using the camera and artificial intelligence. Created as a solution to help users avoid vehicle damage and accidents.",
+        "contact": "Contact & Support",
+        "website": "Official Website"
+    }
+    
+}
