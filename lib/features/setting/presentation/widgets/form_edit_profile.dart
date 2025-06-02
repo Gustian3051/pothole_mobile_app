@@ -15,7 +15,7 @@ final userDataProvider = FutureProvider<Map<String, dynamic>>((ref) async {
 });
 
 class FormEditProfile extends ConsumerWidget {
-  const FormEditProfile({Key? key}) : super(key: key);
+  const FormEditProfile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

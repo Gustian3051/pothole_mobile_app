@@ -46,7 +46,7 @@ class EditProfileController {
     } catch (e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('edit-profile.message-save-failed'.tr() + ': $e')),
+        SnackBar(content: Text('${'edit-profile.message-save-failed'.tr()}: $e')),
       );
     }
   }
