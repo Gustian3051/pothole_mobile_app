@@ -4,7 +4,7 @@ import 'package:pothole_mobile_app/features/setting/presentation/widgets/form_ed
 import 'package:easy_localization/easy_localization.dart';
 
 class EditProfileView extends ConsumerWidget {
-  const EditProfileView({Key? key}) : super(key: key);
+  const EditProfileView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
