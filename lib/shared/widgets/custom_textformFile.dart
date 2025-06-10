@@ -10,14 +10,14 @@ class CustomTextFormField extends ConsumerWidget {
   final void Function(String?)? onSaved;
 
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
     this.validator,
     this.onSaved,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +32,7 @@ class CustomTextFormField extends ConsumerWidget {
           labelText: label,
           prefixIcon: Icon(icon),
           filled: true,
-          fillColor: Theme.of(context).colorScheme.surfaceVariant,
+          fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none
