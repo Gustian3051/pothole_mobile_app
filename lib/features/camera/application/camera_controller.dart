@@ -75,7 +75,7 @@ class CameraNotifier extends StateNotifier<CameraState> {
   }
 
   Future<void> _sendToServer(File image) async {
-    final uri = Uri.parse('http://192.168.1.10:5000/api/pothole');
+    final uri = Uri.parse('http://192.168.43.240:5000/api/pothole');
     final request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('image', image.path));
 

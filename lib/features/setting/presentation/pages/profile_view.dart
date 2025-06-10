@@ -9,10 +9,57 @@ import 'package:pothole_mobile_app/features/setting/application/profile_controll
 class ProfileView extends ConsumerWidget {
   const ProfileView({super.key});
 
+  void _showImageSourceDialog(BuildContext context, WidgetRef ref) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Galeri"),
+                onTap: () {
+                  Navigator.pop(context);
+                  ref
+                      .read(ProfileControllerProveder)
+                      .updateProfileImageFromGallery();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text("Kamera"),
+                onTap: () {
+                  Navigator.pop(context);
+                  ref
+                      .read(ProfileControllerProveder)
+                      .updateProfileImageFromCamera();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.folder),
+                title: const Text("File Manager / Drive"),
+                onTap: () {
+                  Navigator.pop(context);
+                  ref
+                      .read(ProfileControllerProveder)
+                      .updateProfileImageFromFileManager();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
-
     final user = FirebaseAuth.instance.currentUser;
     final isGoogleLogin = user?.providerData.first.providerId == 'google.com';
 
@@ -20,53 +67,97 @@ class ProfileView extends ConsumerWidget {
       loading:
           () =>
               const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (err, stack) => Scaffold(body: Center(child: Text('Error: $err'))),
+      error: (err, _) => Scaffold(body: Center(child: Text('Error: $err'))),
       data: (_) {
         final controller = ref.watch(ProfileControllerProveder);
 
         return Scaffold(
-          appBar: AppBar(title: Text('profile.title'.tr())),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
+          appBar: AppBar(
+            title: Text('profile.title'.tr()),
+            centerTitle: true,
+            elevation: 1,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage:
-                      // ignore: unnecessary_null_comparison
-                      controller.photoUrl != null
-                          ? NetworkImage(controller.photoUrl)
-                          : const AssetImage(
-                                'assets/images/profile-default.png',
-                              )
-                              as ImageProvider,
+                Center(
+                  child: GestureDetector(
+                    onTap: () => _showImageSourceDialog(context, ref),
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          controller.photoUrl.isNotEmpty
+                              ? NetworkImage(controller.photoUrl)
+                              : const AssetImage(
+                                    'assets/images/profile-default.png',
+                                  )
+                                  as ImageProvider,
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(4),
+                          child: const Icon(
+                            Icons.edit,
+                            size: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Text(
                   controller.displayName,
-                  style: const TextStyle(
-                    fontSize: 20,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   controller.email,
-                  style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 24),
-                ListTile(
-                  leading: const Icon(Icons.edit),
-                  title: Text('profile.edit-profile'.tr()),
-                  onTap: () => context.push('/edit_profile'),
+                const SizedBox(height: 32),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.edit),
+                    title: Text(
+                      'profile.edit-profile'.tr(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => context.push('/edit_profile'),
+                  ),
                 ),
+                const SizedBox(height: 12),
                 if (!isGoogleLogin)
-                  ListTile(
-                    leading: const Icon(Icons.lock),
-                    title: Text('profile.change-password'.tr()),
-                    onTap: () {
-                      context.push('/change_password');
-                    },
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      leading: const Icon(Icons.lock),
+                      title: Text(
+                        'profile.change-password'.tr(),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () => context.push('/change_password'),
+                    ),
                   ),
               ],
             ),

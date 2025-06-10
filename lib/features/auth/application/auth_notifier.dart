@@ -1,14 +1,28 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pothole_mobile_app/features/auth/application/auth_controller.dart';
+
 
 class AuthNotifier extends ChangeNotifier {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final Ref ref;
+  User? user;
+  late final Stream<User?> _authStream;
+  late final StreamSubscription<User?> _authSubscription;
 
-  AuthNotifier() {
-    _auth.authStateChanges().listen((_) {
+  AuthNotifier(this.ref) {
+    _authStream = ref.read(firebaseAuthProvider).authStateChanges();
+    _authSubscription = _authStream.listen((firebaseUser) {
+      user = firebaseUser;
       notifyListeners();
     });
   }
 
-  User? get user => _auth.currentUser;
+  @override
+  void dispose() {
+    _authSubscription.cancel();
+    super.dispose();
+  }
 }

@@ -17,7 +17,7 @@ class BoundingBox {
     return BoundingBox(
       x: xmin / imgWidth,
       y: ymin / imgHeight,
-      w: (xmax - ymin) / imgWidth,
+      w: (xmax - xmin) / imgWidth,
       h: (ymax - ymin) / imgHeight,
     );
   }

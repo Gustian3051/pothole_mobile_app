@@ -1,15 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pothole_mobile_app/features/auth/application/auth_notifier.dart';
-import 'package:pothole_mobile_app/features/auth/login/presentation/pages/login_view.dart';
-import 'package:pothole_mobile_app/features/auth/register/presentation/pages/register_view.dart';
+import 'package:pothole_mobile_app/features/auth/presentation/pages/login_view.dart';
+import 'package:pothole_mobile_app/features/auth/presentation/pages/register_view.dart';
 import 'package:pothole_mobile_app/features/setting/presentation/pages/about_view.dart';
 import 'package:pothole_mobile_app/features/setting/presentation/pages/change_password_view.dart';
 import 'package:pothole_mobile_app/features/setting/presentation/pages/edit_profile_view.dart';
 import 'package:pothole_mobile_app/features/setting/presentation/pages/profile_view.dart';
 import 'package:pothole_mobile_app/navigation/navigationView.dart';
 
-final authNotifierProvider = ChangeNotifierProvider((ref) => AuthNotifier());
+final authNotifierProvider = ChangeNotifierProvider((ref) {
+  return AuthNotifier(ref);
+});
 
 final routerProvider = Provider<GoRouter>((ref) {
   final auth = ref.watch(authNotifierProvider);
